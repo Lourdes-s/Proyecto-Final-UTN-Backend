@@ -1,4 +1,4 @@
-import pool from "../config/dbMysql.config.js";
+import pool from "../config/dbMySql.config.js";
 
 class ContactRepository {
     static async getContacts(user_id, page, per_page) {

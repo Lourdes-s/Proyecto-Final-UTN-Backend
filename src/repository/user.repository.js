@@ -1,4 +1,4 @@
-import pool from "../config/dbMysql.config.js";
+import pool from "../config/dbMySql.config.js";
 import UserMapper from "./user.mapper.js";
 
 class UserRepository {
