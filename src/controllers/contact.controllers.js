@@ -16,6 +16,24 @@ export const getContactsController = async (req, res, next) => {
     }
 }
 
+export const getContactController = async (req, res, next) => {
+    try{
+        const { page, per_page } = req.query
+        const { user_id_contact } = req.params
+
+        const contact = await ContactRepository.getContact(req.user.id, user_id_contact, page, per_page)
+        if(!contact){
+            next(new AppError("Contact not found", 404))
+            return
+        }
+
+        return res.status(200).json(contact)
+    }
+    catch (error){
+        next(error)
+    }
+}
+
 const validatePostContact = (email) => {
     const validator = {
         email: {
