@@ -1,4 +1,4 @@
-import pool from "../config/dbMysql.config.js";
+import pool from "../config/dbMySql.config.js";
 import ChatMapper from "./chat.mapper.js";
 
 class ChatRepository {
