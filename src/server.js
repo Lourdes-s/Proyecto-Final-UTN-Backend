@@ -5,11 +5,13 @@ import errorHandlerMiddleware from './middlewares/errorHandler.middleware.js'
 import userRouter from './routes/user.route.js'
 import chatRouter from './routes/chat.route.js'
 import contactRouter from './routes/contact.route.js'
+import { customCorsMiddleware } from './middlewares/cors.middleware.js'
 
 const PORT = 3000
 const app = express()
 
-//cors es un middleware que habilita las consultas de origen cruzadas
+app.use(customCorsMiddleware)
+
 app.use(cors())
 app.use(express.json())
 
