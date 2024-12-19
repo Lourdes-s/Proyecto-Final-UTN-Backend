@@ -6,7 +6,8 @@ class ChatMapper {
             undefined,
             result.content, 
             result.created_at, 
-            result.issurer_id === user_id
+            result.issurer_id === user_id,
+            undefined
         )
     }
 
@@ -16,7 +17,8 @@ class ChatMapper {
             isIssurer ? result.r_username : result.i_username,
             result.content, 
             result.created_at, 
-            isIssurer
+            isIssurer,
+            isIssurer ? result.r_id : result.i_id
         )
     }
 }
