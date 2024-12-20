@@ -151,7 +151,7 @@ export const forgotPasswordController = async (req, res, next) => {
             }
         )
 
-        const resetUrl = `${ENVIROMENT.URL_FRONTEND}/auth/recovery-password/${reset_token}`
+        const resetUrl = `${ENVIROMENT.FRONTEND_URL}/auth/recovery-password/${reset_token}`
 
         await transporterEmail.sendMail({
             subject: 'Restablecer contraseña',
