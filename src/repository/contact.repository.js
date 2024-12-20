@@ -11,12 +11,12 @@ class ContactRepository {
         return rows
     }
 
-    static async getContact(user_id, contact_id, page, per_page) {
+    static async getContact(user_id, contact_id) {
         const query = `SELECT username, email
         FROM Contacts as c INNER JOIN Users as u ON c.user_id_contact = u.id 
-        WHERE c.user_id = ? AND c.active = 1 AND u.active = 1  AND u.id = ? ORDER BY username LIMIT ? OFFSET ?`
+        WHERE c.user_id = ? AND c.active = 1 AND u.active = 1  AND c.user_id_contact = ?`
         
-        const [rows] = await pool.execute(query, [user_id, contact_id, per_page, page * per_page])
+        const [rows] = await pool.execute(query, [user_id, contact_id])
 
         if(rows.length > 0){
             return rows[0]

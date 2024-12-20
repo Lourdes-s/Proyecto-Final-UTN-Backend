@@ -18,10 +18,9 @@ export const getContactsController = async (req, res, next) => {
 
 export const getContactController = async (req, res, next) => {
     try{
-        const { page, per_page } = req.query
         const { user_id_contact } = req.params
 
-        const contact = await ContactRepository.getContact(req.user.id, user_id_contact, page, per_page)
+        const contact = await ContactRepository.getContact(req.user.id, user_id_contact)
         if(!contact){
             next(new AppError("Contact not found", 404))
             return
