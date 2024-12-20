@@ -85,7 +85,7 @@ export const verifyEmailController = async (req, res, next) => {
         userToVerify.verify_email = true
 
         await UserRepository.updateUser(userToVerify)
-        res.redirect(`${ENVIROMENT.URL_FRONTEND}/login`)
+        res.redirect(`${ENVIROMENT.FRONTEND_URL}/login`)
     }
     catch (error) {
         next(error)
