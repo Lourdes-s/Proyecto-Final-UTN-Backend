@@ -13,7 +13,7 @@ const trasporterEmail = nodemailer.createTransport({
 })
 
 export const sendResgisterMail = async (validationToken, email) => {
-    const redirectUrl = `http://localhost:3000/api/auth/verify-email/` + validationToken
+    const redirectUrl = `${ENVIROMENT.FRONTEND_URL}/api/auth/verify-email/` + validationToken
     const result = await trasporterEmail.sendMail({
         subject: 'Valida tu email',
         to: email,
