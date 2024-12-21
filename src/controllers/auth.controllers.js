@@ -192,7 +192,7 @@ export const recoveryPasswordController = async (req, res, next) => {
         user.password = passwordHash
 
         await UserRepository.updateUser(user)
-        res.sendStatus(200)
+        res.redirect(`${ENVIROMENT.FRONTEND_URL}/login`)
     }
     catch (error) {
         next(error)
