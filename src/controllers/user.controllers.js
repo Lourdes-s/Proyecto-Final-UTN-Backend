@@ -17,7 +17,7 @@ export const getUserController = async (req, res, next) => {
             return
         }
 
-        return res.status(201).json(User.createUserPublic(user))
+        return res.status(200).json(User.createUserPublic(user))
     }
     catch (error){
         next(error)
