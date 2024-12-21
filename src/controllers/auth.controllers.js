@@ -136,36 +136,39 @@ export const loginController = async (req, res, next) => {
 export const forgotPasswordController = async (req, res, next) => {
     try {
         const { email } = req.body  
-        const user = await User.findOne({email: email})
+        const user = await UserRepository.getUserByEmail(email)
         if (!user) {
             next(new AppError("User not found", 404))
             return
         }
-        const reset_token = jwt.sign(
-            {
-                email: email
-            },
-            ENVIROMENT.SECRET_KEY,
-            {
-                expiresIn: '1d'
-            }
-        )
-
-        const resetUrl = `${ENVIROMENT.FRONTEND_URL}/auth/recovery-password/${reset_token}`
-
-        await transporterEmail.sendMail({
-            subject: 'Restablecer contraseña',
-            to: email,
-            html: `
-                <h1>Para poder restablecer tu contraseña ha click <a href='${resetUrl}'> aqui </a></h1>
-            `
-        })
+        const reset_token = jwt.sign({ email: email }, ENVIROMENT.SECRET_KEY, { expiresIn: '1d' })
+        const result = await sendResgisterMail(reset_token, email)
 
         return res.status(200).json({
             ok: true,
             message: 'El correo electronico ha sido enviado'
         })
 
+    }
+    catch (error) {
+        next(error)
+    }
+}
+
+export const recoveryPasswordController = async (req, res, next) => {
+    try {
+        const { password, reset_token } = req.body        
+        const {email} = jwt.verify(reset_token, ENVIROMENT.SECRET_KEY)
+        const user = await UserRepository.getUserByEmail(email)
+        if(!user){
+            next(new AppError("User not found", 404))
+            return
+        }
+        const passwordHash = await bcrypt.hash(password, 10)        
+        user.password = passwordHash
+
+        await UserRepository.updateUser(user)
+        res.sendStatus(200)
     }
     catch (error) {
         next(error)

@@ -24,3 +24,15 @@ export const sendResgisterMail = async (validationToken, email) => {
     })
     return result
 }
+
+export const sendRecoveryMail = async (reset_token, email) => {
+    const resetUrl = `${ENVIROMENT.FRONTEND_URL}/auth/recovery-password/${reset_token}`
+    const result = await trasporterEmail.sendMail({
+        subject: 'Restablecer contraseña',
+        to: email,
+        html: `
+            <h1>Para poder restablecer tu contraseña ha click <a href='${resetUrl}'> aqui </a></h1>
+        `
+    })
+    return result
+}
