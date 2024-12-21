@@ -5,7 +5,7 @@ import UserRepository from "../repository/user.repository.js"
 import User from "../model/user.model.js"
 import jwt from 'jsonwebtoken'
 import ENVIROMENT from "../config/eviroment.js"
-import { sendResgisterMail } from "../helpers/mail.helpers.js"
+import { sendResgisterMail, sendRecoveryMail } from "../helpers/mail.helpers.js"
 
 const validateRegister = (name, password, email) => {
     const validator = {
@@ -48,6 +48,25 @@ const validateLogin = (password, email) => {
             validation: [
                 verifyEmail,
                 (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+            ]
+        }
+    }
+    return verifyValidator(validator)
+}
+
+const validateRecovery = (password, reset_token) => {
+    const validator = {
+        password: {
+            value: password,
+            validation: [
+                verifyString,
+                (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+            ]
+        },
+        reset_token: {
+            value: reset_token,
+            validation: [
+                verifyString
             ]
         }
     }
@@ -142,7 +161,7 @@ export const forgotPasswordController = async (req, res, next) => {
             return
         }
         const reset_token = jwt.sign({ email: email }, ENVIROMENT.SECRET_KEY, { expiresIn: '1d' })
-        const result = await sendResgisterMail(reset_token, email)
+        const result = await sendRecoveryMail(reset_token, email)
 
         return res.status(200).json({
             ok: true,
@@ -157,7 +176,12 @@ export const forgotPasswordController = async (req, res, next) => {
 
 export const recoveryPasswordController = async (req, res, next) => {
     try {
-        const { password, reset_token } = req.body        
+        const { password, reset_token } = req.body   
+        const errors = validateRecovery(password, reset_token)
+        if (errors !== undefined) {
+            next(new AppError(errors, 400))
+            return
+        }     
         const {email} = jwt.verify(reset_token, ENVIROMENT.SECRET_KEY)
         const user = await UserRepository.getUserByEmail(email)
         if(!user){
