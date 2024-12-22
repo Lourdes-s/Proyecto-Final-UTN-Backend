@@ -18,7 +18,7 @@ class ChatRepository {
                 FIRST_VALUE(c.created_at) OVER (PARTITION BY c.issurer_id, c.receiver_id  ORDER BY c.created_at DESC) AS created_at,
                 i.thumbnail as i_thumbnail, r.thumbnail as r_thumbnail
             FROM Chats as c INNER JOIN Users as i ON c.issurer_id = i.id INNER JOIN Users as r ON c.receiver_id = r.id 
-            WHERE (c.issurer_id = ? OR c.receiver_id = ?) AND c.active = 1 
+            WHERE (c.issurer_id = ? OR c.receiver_id = ?) AND c.active = 1  ORDER BY created_at DESC
         ) as t
         GROUP BY id
         LIMIT ? OFFSET ?`
