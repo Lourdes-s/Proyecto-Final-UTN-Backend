@@ -7,6 +7,7 @@ class ChatMapper {
             result.content, 
             result.created_at, 
             result.issurer_id === user_id,
+            undefined,
             undefined
         )
     }
@@ -14,11 +15,12 @@ class ChatMapper {
     static mapChatFromSqlResult(result, user_id) {
         const isIssurer = result.i_id === user_id
         return new Chat(
-            !isIssurer ? result.r_username : result.i_username,
+            isIssurer ? result.r_username : result.i_username,
             result.content, 
             result.created_at, 
             isIssurer,
-            !isIssurer ? result.r_id : result.i_id
+            isIssurer ? result.r_id : result.i_id,
+            isIssurer ? result.r_thumbnail : result.i_thumbnail
         )
     }
 }
