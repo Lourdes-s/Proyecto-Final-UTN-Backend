@@ -19,7 +19,7 @@ class ChatRepository {
             FROM Chats as c INNER JOIN Users as i ON c.issurer_id = i.id INNER JOIN Users as r ON c.receiver_id = r.id 
             WHERE (c.issurer_id = ? OR c.receiver_id = ?) AND c.active = 1 
         ) as t
-        GROUP BY id
+        GROUP BY i_id, r_id
         LIMIT ? OFFSET ?`
 
         const [rows] = await pool.execute(query, [user_id, user_id, per_page, page * per_page])
