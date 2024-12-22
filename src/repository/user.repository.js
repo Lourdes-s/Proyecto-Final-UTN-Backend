@@ -53,12 +53,17 @@ class UserRepository {
             email, 
             password,
             active,
-            verify_email
+            verify_email,
+            thumbnail, 
+            telephone,
+            public_state,
+            description_content,
+            address_content
         } = user
 
-        const query = `UPDATE Users SET username = ?, email = ?, password = ?, active = ?, verify_email = ? WHERE id = ?`
+        const query = `UPDATE Users SET username = ?, email = ?, password = ?, active = ?, verify_email = ?, thumbnail = ?, telephone = ?, public_state = ?, description_content = ?, address_content = ? WHERE id = ?`
 
-        const [result] = await pool.execute(query, [username, email, password, active, verify_email, id])
+        const [result] = await pool.execute(query, [username, email, password, active, verify_email, thumbnail, telephone, public_state, description_content, address_content, id])
 
         if(result.affectedRows > 0){
             return result.insertId

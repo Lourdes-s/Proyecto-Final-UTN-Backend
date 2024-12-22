@@ -12,7 +12,7 @@ class ContactRepository {
     }
 
     static async getContact(user_id, contact_id) {
-        const query = `SELECT username, email
+        const query = `SELECT username, email, thumbnail, telephone, public_state, description_content, address_content
         FROM Contacts as c INNER JOIN Users as u ON c.user_id_contact = u.id 
         WHERE c.user_id = ? AND c.active = 1 AND u.active = 1  AND c.user_id_contact = ?`
         

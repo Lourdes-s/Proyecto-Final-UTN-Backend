@@ -29,3 +29,9 @@ CREATE TABLE Chats (
     FOREIGN KEY (issurer_id) REFERENCES Users (id) ON DELETE CASCADE,
     FOREIGN KEY (receiver_id) REFERENCES Users (id) ON DELETE CASCADE
 )
+
+ALTER TABLE Users ADD thumbnail LONGTEXT; 
+ALTER TABLE Users ADD telephone VARCHAR(255); 
+ALTER TABLE Users ADD public_state VARCHAR(255); 
+ALTER TABLE Users ADD description_content VARCHAR(255); 
+ALTER TABLE Users ADD address_content VARCHAR(255); 
