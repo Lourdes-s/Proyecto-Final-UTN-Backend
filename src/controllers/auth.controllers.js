@@ -104,7 +104,10 @@ export const verifyEmailController = async (req, res, next) => {
         userToVerify.verify_email = true
 
         await UserRepository.updateUser(userToVerify)
-        return res.status(200).json({ message: 'Correo verificado correctamente.' })
+        return res.status(200).json({
+            ok: true,
+            message: 'El correo electronico ha sido enviado'
+        })
     }
     catch (error) {
         next(error)
