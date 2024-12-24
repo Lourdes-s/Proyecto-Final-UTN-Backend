@@ -10,6 +10,7 @@ const ENVIROMENT = {
     EMAIL_USER: process.env.EMAIL_USER || '',
     SECRET_KEY: process.env.SECRET_KEY || '',
     FRONTEND_URL: process.env.FRONTEND_URL || '',
+    BACKEND_URL: process.env.BACKEND_URL || '',
     MY_SQL: {
         HOST: process.env.MYSQL_HOST,
         DATABASE: process.env.MYSQL_DATABASE,
