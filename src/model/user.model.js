@@ -43,6 +43,14 @@ class User {
             address_content: user.address_content
         }
     }
+
+    static createUserToken(user) {
+        return {
+            id: user.id,
+            username: user.username,
+            email: user.email
+        }
+    }
 }
 
 export default User

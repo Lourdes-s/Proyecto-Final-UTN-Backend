@@ -142,7 +142,7 @@ export const loginController = async (req, res, next) => {
             return
         }
 
-        const userPublic = User.createUserPublic(user)
+        const userPublic = User.createUserToken(user)
         const access_token = jwt.sign({ userPublic }, ENVIROMENT.SECRET_KEY, { expiresIn: '1d' })
 
         return res.status(200).json({
