@@ -1,4 +1,5 @@
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+const nationalNumberRegex = /^\d{10}$/
 
 export const verifyString = (field_name, field_value) => {
     if(!(typeof(field_value) === 'string')){
@@ -41,6 +42,15 @@ export const verifyEmail = (field_name, field_value) => {
         return {
             error: 'EMAIL_VALIDATION',
             message: field_name + ' no cumple el formato email'
+        }
+    }
+}
+
+export const verifyPhoneNumber = (field_name, field_value) => {
+    if(!(nationalNumberRegex.test(field_value))){
+        return {
+            error: 'PHONE_VALIDATION',
+            message: field_name + 'no cumple el formato de telefono'
         }
     }
 }

@@ -1,5 +1,5 @@
 import AppError from "../helpers/errors/app.error.js"
-import { verifyMinLength, verifyString, verifyValidator } from "../helpers/validations.helpers.js"
+import { verifyMinLength, verifyPhoneNumber, verifyString, verifyValidator } from "../helpers/validations.helpers.js"
 import User from "../model/user.model.js"
 import UserRepository from "../repository/user.repository.js"
 
@@ -36,29 +36,28 @@ const validateUpdate = (thumbnail, telephone, public_state, description_content,
         telephone: {
             value: telephone,
             validation: [
-                verifyString,
-                (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+                verifyPhoneNumber
             ]
         },
         public_state: {
             value: public_state,
             validation: [
                 verifyString,
-                (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+                (field_name, field_value) => verifyMinLength(field_name, field_value, 1)
             ]
         },
         description_content: {
             value: description_content,
             validation: [
                 verifyString,
-                (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+                (field_name, field_value) => verifyMinLength(field_name, field_value, 1)
             ]
         },
         address_content: {
             value: address_content,
             validation: [
                 verifyString,
-                (field_name, field_value) => verifyMinLength(field_name, field_value, 10)
+                (field_name, field_value) => verifyMinLength(field_name, field_value, 5)
             ]
         }
     }
