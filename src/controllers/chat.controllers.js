@@ -5,8 +5,7 @@ import ChatRepository from "../repository/chat.repository.js"
 export const getChatsController = async (req, res, next) => {
     try{
         const { page, per_page } = req.query
-
-        const chats = await ChatRepository.getChats(req.user.id, page, per_page)
+        const chats = await ChatRepository.getChats(req.user.id, Number(page), Number(per_page))
 
         return res.status(200).json(chats)
     }
