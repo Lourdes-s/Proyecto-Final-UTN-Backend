@@ -23,7 +23,7 @@ class ChatRepository {
         GROUP BY id
         LIMIT ? OFFSET ?`
 
-        const [rows] = await pool.execute(query, [user_id, user_id, per_page, page * per_page])
+        const [rows] = await pool.query(query, [user_id, user_id, per_page, page * per_page])
 
         return rows.map(row => ChatMapper.mapChatFromSqlResult(row, user_id))
     }
