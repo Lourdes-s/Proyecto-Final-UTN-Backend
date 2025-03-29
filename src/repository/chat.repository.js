@@ -5,7 +5,7 @@ class ChatRepository {
     static async getChat(user_id, user_id_contact, page, per_page) {
         const query = `SELECT * FROM Chats WHERE ((issurer_id = ? AND receiver_id = ?) OR (issurer_id = ? AND receiver_id = ?)) AND active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?`
 
-        const [rows] = await pool.execute(query, [user_id, user_id_contact, user_id_contact, user_id, per_page, page * per_page])
+        const [rows] = await pool.query(query, [user_id, user_id_contact, user_id_contact, user_id, per_page, page * per_page])
 
         return rows.map(row => ChatMapper.mapMessageFromSqlResult(row, user_id))
     }
