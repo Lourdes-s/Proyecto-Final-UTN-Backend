@@ -21,7 +21,7 @@ export const getChatController = async (req, res, next) => {
 
         //TODO maybe check if req.user.id is contact with user_id_contact
 
-        const messages = await ChatRepository.getChat(req.user.id, user_id_contact, Number(page), Number(per_pag))
+        const messages = await ChatRepository.getChat(req.user.id, user_id_contact, Number(page), Number(per_page))
 
         return res.status(200).json(messages)
     }
