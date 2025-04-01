@@ -72,6 +72,13 @@ class UserRepository {
             console.log('holi') //TODO check
         }
     }
+
+    static async checkEmail(email) {
+        const query = 'SELECT COUNT(*) AS count FROM Users WHERE email = ?'
+        const [rows] = await db.execute(query, [email])
+
+        return rows[0].count > 0
+    }
 }
 
 export default UserRepository
