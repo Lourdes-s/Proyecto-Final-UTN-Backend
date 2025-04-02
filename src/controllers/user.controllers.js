@@ -99,20 +99,3 @@ export const updateUserController = async (req, res, next) => {
         next(error)
     }
 }
-
-export const findEmailUserController = async (req, res, next) => {
-    try {
-        const { email } = req.body;
-
-        // Verificar si el correo electrónico está en la base de datos
-        const userExists = await UserRepository.checkEmail(email); 
-
-        if (userExists) {
-            return res.status(200).json(true)
-        } else {
-            return res.status(200).json(false)
-        }
-    } catch (error) {
-        next(error)
-    }
-}
