@@ -67,7 +67,7 @@ export const postContactController = async (req, res, next) => {
             user_id_contact: contactUser.id
         })
 
-        return res.sendStatus(201).json({ message: "Contacto creado exitosamente" })
+        return res.status(201).json({ message: "Contacto creado exitosamente" })
     }
     catch (error){
         next(error)
