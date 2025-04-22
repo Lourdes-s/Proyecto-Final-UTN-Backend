@@ -46,5 +46,5 @@ Podés probar la aplicación con el siguiente usuario:
 
 ---
 
-## ✍️ Autora
+## 🌸 Autora
 **Lourdes Santillan**
