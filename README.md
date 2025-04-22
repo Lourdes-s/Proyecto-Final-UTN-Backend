@@ -1,18 +1,50 @@
-##README
+# 📱 Proyecto de Mensajería - Estilo WhatsApp Web
 
-**Descripción**
-Este proyecto consiste en una aplicación de mensajería inspirada en whatsapp, no está terminada completamente y tiene cosas que pulir. Es la continuación del primer trabajo entregado de frontend, a este se le incorporo todo el backend y todo el flujo de “register”, “login”, “forgot password”, “recovery password”, también la posibilidad de editar tu perfil y algunas cosas extras como las rutas protegidas del lado del frontend o el “404 not found” el cual es frecuente que salga cada vez que quieras ingresar un chat cuyo usuario no tengas agregado a contactos, siendo este un punto faltante muy importante a terminar de  desarrollar completamente, porque aún no está incorporada la opción de agregar contactos desde el frontend.
-Dejo un usuario con el que se puede probar los chats y mandar mensajes:
-Email: lourdes.tests@gmail.com
-Password: Mensajeria123
-También el curl de postman por si quieren añadir un contacto de esta forma
-cURL --location --request POST 'https://proyecto-final-utn-backend.vercel.app/api/contact’\
---header 'Content-Type: application/json' \
---header 'Authorization: Bearer YOUR_ACCESS_TOKEN' \
---data-raw '{
-    "email": "lourdes.tests+8@gmail.com"
-}'
+## 📌 Descripción
 
+Este proyecto es una aplicación de mensajería inspirada en **WhatsApp Web**, desarrollada como trabajo final de la diplomattura fullStack de la UTN (Universidad Tecnológica Nacional). Es una continuación del proyecto frontend anterior, al cual se le incorporó toda la lógica de backend y funcionalidades completas de autenticación y manejo de usuarios.
 
-**Librerías usadas**
-En esto no profundice más de lo que trabaje en el primer trabajo además de los iconos solamente está el “loader” de la siguiente librería https://codepen.io/aryabardhan/pen/qBwVgRV.
+### Funcionalidades implementadas:
+- Registro de usuario (`register`)
+- Inicio de sesión (`login`)
+- Recuperación de contraseña (`forgot password` y `recovery password`)
+- Edición de perfil
+- Chats entre usuarios
+- Agregar contactos
+- Carga progresiva de mensajes con scroll infinito
+- Validación de rutas protegidas en frontend
+- Página personalizada de error 404 cuando se accede a un chat sin tener agregado al usuario
+- Diseño responsive inspirado en WhatsApp Web
+
+### Usuario de prueba
+Podés probar la aplicación con el siguiente usuario:
+
+- **Email:** `lourdes.tests@gmail.com`  
+- **Contraseña:** `Mensajeria123`
+
+🔗 [Ir a la app](https://proyecto-final-utn-frontend.vercel.app/login)
+
+---
+
+## 🧩 Tecnologías y librerías utilizadas
+
+### Frontend
+- **React**
+- **Vite**
+- **CSS puro** (diseño personalizado)
+- Loader animado: [Codepen Loader](https://codepen.io/aryabardhan/pen/qBwVgRV)
+
+### Backend
+- **Node.js**
+- **Express**
+- **MySQL2** – Conexión a base de datos SQL
+- **bcrypt** – Encriptación de contraseñas
+- **jsonwebtoken** – Autenticación con tokens JWT
+- **dotenv** – Variables de entorno
+- **nodemailer** – Envío de mails para recuperación de contraseña
+- **cors** – Manejo de CORS
+
+---
+
+## ✍️ Autora
+**Lourdes Santillan**
