@@ -39,8 +39,17 @@ class ContactRepository {
             return result.insertId
         }
         else{
-            console.log('holi') //TODO check
+            console.error("Error al crear el contacto en la base de datos.")
         }
+    }
+    static async isContact(user_id, contact_id) {
+        const query = `SELECT COUNT(*) as count
+        FROM Contacts
+        WHERE (user_id = ? AND user_id_contact = ?) OR (user_id = ? AND user_id_contact = ?) AND active = 1`
+
+        const [rows] = await pool.execute(query, [user_id, contact_id, contact_id, user_id])
+
+        return rows[0].count > 0
     }
 }
 

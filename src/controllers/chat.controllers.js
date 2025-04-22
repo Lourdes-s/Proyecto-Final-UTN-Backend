@@ -1,6 +1,7 @@
 import AppError from "../helpers/errors/app.error.js"
 import { verifyMaxLength, verifyString, verifyValidator } from "../helpers/validations.helpers.js"
 import ChatRepository from "../repository/chat.repository.js"
+import ContactRepository from "../repository/contact.repository.js"
 
 export const getChatsController = async (req, res, next) => {
     try{
@@ -19,7 +20,11 @@ export const getChatController = async (req, res, next) => {
         const { page, per_page } = req.query
         const { user_id_contact } = req.params
 
-        //TODO maybe check if req.user.id is contact with user_id_contact
+        const isContact = await ContactRepository.isContact(req.user.id, user_id_contact)
+
+        if (!isContact) {
+            return next(new AppError("No tienes permiso para acceder a este chat.", 403))
+        }
 
         const messages = await ChatRepository.getChat(req.user.id, user_id_contact, Number(page), Number(per_page))
 

@@ -41,7 +41,7 @@ class ChatRepository {
             return result.insertId
         }
         else{
-            console.log('holi') //TODO check
+            console.error("Error al crear el mensaje en la base de datos.")
         }
     }
 }

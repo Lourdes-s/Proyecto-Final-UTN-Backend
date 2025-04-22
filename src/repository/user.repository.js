@@ -10,6 +10,7 @@ class UserRepository {
             return UserMapper.mapUserFromSqlResult(rows[0])
         }
         else{
+            console.log(`Usuario con ID ${userId} no encontrado o inactivo/no verificado.`)
             return undefined
         }
     }
@@ -42,7 +43,7 @@ class UserRepository {
             return result.insertId
         }
         else{
-            console.log('holi') //TODO check
+            console.error("Error al crear el usuario en la base de datos.")
         }
     }
 
@@ -69,7 +70,8 @@ class UserRepository {
             return result.insertId
         }
         else{
-            console.log('holi') //TODO check
+            console.log("No se pudo actualizar el usuario. Puede que no exista.")
+            return undefined
         }
     }
 }
